@@ -9,3 +9,7 @@ html {
 body {
   @apply bg-light text-dark dark:bg-dark dark:text-white font-sans;
 }
+
+main {
+  @apply py-12;
+}
