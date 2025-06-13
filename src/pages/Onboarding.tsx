@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useOnboardingStore } from "../store/onboardingStore";
+import Step1 from "../features/onboarding/Step1";
 
 export default function Onboarding() {
   const user = useOnboardingStore((s) => s.user);
+  const step = useOnboardingStore((s) => s.onboardingStep);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,11 +14,5 @@ export default function Onboarding() {
 
   if (!user) return null;
 
-  return (
-    <main className="min-h-screen py-12">
-      <h1 className="text-2xl font-display font-bold text-center">
-        Onboarding
-      </h1>
-    </main>
-  );
+  return <main className="min-h-screen py-12">{step === 1 && <Step1 />}</main>;
 }
