@@ -2,6 +2,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOnboardingStore } from "../../store/onboardingStore";
+import { motion } from "framer-motion";
 
 const schema = z.object({
   name: z.string().min(2, "Name is too short"),
@@ -35,7 +36,13 @@ export default function Step1() {
   };
 
   return (
-    <section className="container py-12 max-w-xl">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4 }}
+      className="container py-12 max-w-xl"
+    >
       <h2 className="text-2xl font-display font-bold mb-6">
         Let’s get started
       </h2>
@@ -86,6 +93,6 @@ export default function Step1() {
           </button>
         </div>
       </form>
-    </section>
+    </motion.section>
   );
 }

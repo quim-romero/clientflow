@@ -2,6 +2,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOnboardingStore } from "../../store/onboardingStore";
+import { motion } from "framer-motion";
 
 const schema = z.object({
   communication: z.string().min(2, "Please select your preferred method."),
@@ -36,7 +37,13 @@ export default function Step2() {
   };
 
   return (
-    <section className="container py-12 max-w-xl">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4 }}
+      className="container py-12 max-w-xl"
+    >
       <h2 className="text-2xl font-display font-bold mb-6">Your Preferences</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
@@ -108,6 +115,6 @@ export default function Step2() {
           </button>
         </div>
       </form>
-    </section>
+    </motion.section>
   );
 }
