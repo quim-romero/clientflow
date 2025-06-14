@@ -13,3 +13,13 @@ body {
 main {
   @apply py-12;
 }
+
+form {
+  @apply space-y-6;
+}
+
+input,
+select,
+textarea {
+  @apply rounded border-muted bg-white dark:bg-dark p-2;
+}
