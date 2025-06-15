@@ -5,6 +5,8 @@ export default function Step3() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const data = useOnboardingStore((s) => s.data);
   const updateData = useOnboardingStore((s) => s.updateData);
+  const nextStep = useOnboardingStore((s) => s.nextStep);
+  const prevStep = useOnboardingStore((s) => s.prevStep);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -66,6 +68,23 @@ export default function Step3() {
           ))}
         </ul>
       )}
+
+      <div className="pt-8 flex justify-between">
+        <button
+          type="button"
+          onClick={prevStep}
+          className="px-4 py-2 rounded-full border border-muted text-muted hover:bg-muted/10"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          onClick={nextStep}
+          className="px-6 py-2 rounded-full bg-brand text-white hover:bg-brand-dark transition"
+        >
+          Continue
+        </button>
+      </div>
     </section>
   );
 }
