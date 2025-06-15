@@ -1,7 +1,23 @@
 import { useRef } from "react";
+import { useOnboardingStore } from "../../store/onboardingStore";
 
 export default function Step3() {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const data = useOnboardingStore((s) => s.data);
+  const updateData = useOnboardingStore((s) => s.updateData);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const fileList = Array.from(files).map((file) => ({
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    }));
+
+    updateData({ assets: fileList });
+  };
 
   const openFileDialog = () => {
     fileInputRef.current?.click();
@@ -31,9 +47,19 @@ export default function Step3() {
         type="file"
         ref={fileInputRef}
         multiple
-        onChange={() => {}}
+        onChange={handleFileChange}
         className="hidden"
       />
+
+      {Array.isArray(data.assets) && data.assets.length > 0 && (
+        <ul className="mt-6 space-y-2 text-sm text-muted">
+          {data.assets.map((file, index) => (
+            <li key={index}>
+              {file.name} ({Math.round(file.size / 1024)} KB)
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
