@@ -51,11 +51,17 @@ export default function Step3() {
         className="hidden"
       />
 
-      {Array.isArray(data.assets) && data.assets.length > 0 && (
-        <ul className="mt-6 space-y-2 text-sm text-muted">
-          {data.assets.map((file, index) => (
-            <li key={index}>
-              {file.name} ({Math.round(file.size / 1024)} KB)
+      {data.assets && data.assets.length > 0 && (
+        <ul className="mt-6 space-y-2 text-sm">
+          {data.assets.map((file, i) => (
+            <li
+              key={i}
+              className="flex justify-between bg-light dark:bg-dark p-2 rounded border border-muted/20"
+            >
+              <span>{file.name}</span>
+              <span className="text-muted text-xs">
+                {(file.size / 1024).toFixed(1)} KB
+              </span>
             </li>
           ))}
         </ul>
