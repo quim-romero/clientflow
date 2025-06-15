@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { motion } from "framer-motion";
 import { useOnboardingStore } from "../../store/onboardingStore";
 
 export default function Step3() {
@@ -26,7 +27,13 @@ export default function Step3() {
   };
 
   return (
-    <section className="container py-12 max-w-xl">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4 }}
+      className="container py-12 max-w-xl"
+    >
       <h2 className="text-2xl font-display font-bold mb-6">
         Upload any helpful assets
       </h2>
@@ -85,6 +92,6 @@ export default function Step3() {
           Continue
         </button>
       </div>
-    </section>
+    </motion.section>
   );
 }
