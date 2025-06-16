@@ -7,6 +7,7 @@ import Step1 from "../features/onboarding/Step1";
 import Step2 from "../features/onboarding/Step2";
 import Step3 from "../features/onboarding/Step3";
 import Step4 from "../features/onboarding/Step4";
+import Step5 from "../features/onboarding/Step5";
 
 export default function Onboarding() {
   const user = useOnboardingStore((s) => s.user);
@@ -24,6 +25,7 @@ export default function Onboarding() {
       {step < 5 && <StepIndicator />}
       {step === 1 && <Step1 />} {step === 2 && <Step2 />}{" "}
       {step === 3 && <Step3 />} {step === 4 && <Step4 />}
+      {step === 5 && <Step5 />}
     </main>
   );
 }
