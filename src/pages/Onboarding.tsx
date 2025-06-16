@@ -23,8 +23,10 @@ export default function Onboarding() {
   return (
     <main className="min-h-screen py-12">
       {step < 5 && <StepIndicator />}
-      {step === 1 && <Step1 />} {step === 2 && <Step2 />}{" "}
-      {step === 3 && <Step3 />} {step === 4 && <Step4 />}
+      {step === 1 && <Step1 />}
+      {step === 2 && <Step2 />}
+      {step === 3 && <Step3 />}
+      {step === 4 && <Step4 />}
       {step === 5 && <Step5 />}
     </main>
   );
