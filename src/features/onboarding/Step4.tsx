@@ -1,4 +1,5 @@
 import { useOnboardingStore } from "../../store/onboardingStore";
+import { motion } from "framer-motion";
 
 export default function Step4() {
   const data = useOnboardingStore((s) => s.data);
@@ -19,7 +20,13 @@ export default function Step4() {
   );
 
   return (
-    <section className="container py-12 max-w-xl">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4 }}
+      className="container py-12 max-w-xl"
+    >
       <h2 className="text-2xl font-display font-bold mb-6">
         Review your information
       </h2>
@@ -52,6 +59,6 @@ export default function Step4() {
           Submit
         </button>
       </div>
-    </section>
+    </motion.section>
   );
 }
