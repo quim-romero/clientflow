@@ -2,6 +2,12 @@ import { useOnboardingStore } from "../../store/onboardingStore";
 
 export default function Step4() {
   const data = useOnboardingStore((s) => s.data);
+  const setStep = useOnboardingStore((s) => s.setStep);
+  const nextStep = useOnboardingStore((s) => s.nextStep);
+
+  const handleSubmit = () => {
+    nextStep();
+  };
 
   const renderRow = (label: string, value?: string | string[]) => (
     <div className="flex justify-between items-start py-2 border-b border-muted/20">
@@ -28,6 +34,23 @@ export default function Step4() {
           "Uploaded files",
           data.assets?.map((f) => f.name)
         )}
+      </div>
+
+      <div className="pt-8 flex justify-between">
+        <button
+          type="button"
+          onClick={() => setStep(3)}
+          className="px-4 py-2 rounded-full border border-muted text-muted hover:bg-muted/10"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          onClick={handleSubmit}
+          className="px-6 py-2 rounded-full bg-brand text-white hover:bg-brand-dark transition"
+        >
+          Submit
+        </button>
       </div>
     </section>
   );
