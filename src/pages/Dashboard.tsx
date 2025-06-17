@@ -32,9 +32,46 @@ export default function Dashboard() {
         </ul>
       </section>
 
-      <pre className="bg-light dark:bg-dark p-4 rounded text-sm overflow-x-auto">
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <section className="bg-light dark:bg-dark p-6 rounded-xl shadow-sm border border-muted/10">
+        <h2 className="text-xl font-semibold mb-4">Your Submission</h2>
+        <div className="space-y-2 text-sm">
+          <p>
+            <span className="font-medium text-muted">Name:</span> {data.name}
+          </p>
+          <p>
+            <span className="font-medium text-muted">Company:</span>{" "}
+            {data.company}
+          </p>
+          <p>
+            <span className="font-medium text-muted">Goals:</span> {data.goals}
+          </p>
+          <p>
+            <span className="font-medium text-muted">Preferred Tools:</span>{" "}
+            {data.tools}
+          </p>
+          <p>
+            <span className="font-medium text-muted">Availability:</span>{" "}
+            {data.availability}
+          </p>
+          <p>
+            <span className="font-medium text-muted">Communication:</span>{" "}
+            {data.communication}
+          </p>
+
+          {data.assets && data.assets.length > 0 && (
+            <div>
+              <p className="font-medium text-muted mb-1">Uploaded Files:</p>
+              <ul className="list-disc ml-5">
+                {data.assets.map((f, i) => (
+                  <li key={i}>
+                    {f.name} ({(f.size / 1024).toFixed(1)} KB)
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
     </main>
   );
 }
