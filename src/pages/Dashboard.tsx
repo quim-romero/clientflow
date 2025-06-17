@@ -2,10 +2,13 @@ import { useOnboardingStore } from "../store/onboardingStore";
 
 export default function Dashboard() {
   const data = useOnboardingStore((s) => s.data);
+  const user = useOnboardingStore((s) => s.user);
 
   return (
     <main className="min-h-screen container py-20">
-      <h1 className="text-3xl font-display font-bold mb-2">Welcome back 👋</h1>
+      <h1 className="text-3xl font-display font-bold mb-2">
+        Welcome back, {user?.split("@")[0]} 👋
+      </h1>
       <p className="text-muted mb-8">
         Here's the current status of your project.
       </p>
