@@ -1,8 +1,17 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useOnboardingStore } from "../store/onboardingStore";
 
 export default function Dashboard() {
   const data = useOnboardingStore((s) => s.data);
   const user = useOnboardingStore((s) => s.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) navigate("/login");
+  }, [user]);
+
+  if (!user) return null;
 
   return (
     <main className="min-h-screen container py-20">
