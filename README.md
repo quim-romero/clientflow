@@ -1,69 +1,110 @@
-# React + TypeScript + Vite
+# ClientFlow — Minimal Onboarding Flow for Agencies
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> _Smooth client onboarding, no friction. Just clarity, flow — and faster projects._
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧭 About ClientFlow
 
-## Expanding the ESLint configuration
+**ClientFlow** is a sleek, no-nonsense onboarding app designed to simplify how digital agencies and freelancers gather initial information from clients.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+With a smooth, multi-step form flow and persistent state, it helps teams:
+- 📥 Collect user and company details
+- 🧭 Understand project goals, tools, and availability
+- 📁 Upload relevant assets for faster kickoff
+- 🌒 Adapt to user theme preferences (light/dark)
+- 💾 Persist data locally for session continuity
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Built with **React**, **Zustand**, **Zod**, and **Tailwind CSS**, it’s fast, minimal, and production-ready.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Live Preview
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+👉 [https://clientflow.quimromero.com](https://clientflow.quimromero.com)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ✨ Features
+
+- ✅ Multi-step onboarding flow with persistent progress
+- ✍️ Collects user name, company, goals, preferences, and files
+- 🧠 Zod-powered form validation (via `react-hook-form`)
+- 📁 Asset upload with inline preview and file metadata
+- 🌓 Light/Dark mode toggle with localStorage memory
+- 🧱 Responsive design with smooth transitions (Framer Motion)
+- 🧪 ESLint and TypeScript strict mode enforcement
+
+---
+
+## 🧠 Tech Stack
+
+| Tech                       | Role                                |
+|----------------------------|-------------------------------------|
+| **React + TypeScript**     | Core frontend framework             |
+| **Zustand**                | Global state and onboarding steps   |
+| **Zod + React Hook Form**  | Schema validation + form handling   |
+| **Tailwind CSS**           | Design system and theming           |
+| **Framer Motion**          | Animations and page transitions     |
+| **Vite**                   | Build tool and local dev server     |
+| **React Router**           | Routing between views               |
+| **ESLint + typescript-eslint** | Linting and code quality       |
+
+---
+
+## 🗂 Project Structure
+
+- `src/`
+  - `pages/` – Main routes: Home, Login, Onboarding, Dashboard
+  - `components/` – Navbar, Footer, StepIndicator, etc.
+  - `features/onboarding/` – All onboarding steps (1 to 5)
+  - `store/` – Zustand store with persistent onboarding data
+  - `hooks/` – Custom hooks (e.g. theme)
+  - `styles/` – Tailwind CSS base and global styles
+- `public/` – Favicon, fonts, and metadata
+- `index.html` – Root HTML with fonts and meta
+- `vite.config.ts` – Vite config with plugin-react
+- `tsconfig.*.json` – TypeScript project configurations
+
+---
+
+## 🧪 End-to-End Testing (Planned)
+
+ClientFlow will soon support **end-to-end testing** using [Cypress](https://www.cypress.io/).
+
+Tests will cover:
+- ✅ Onboarding flow step-by-step
+- ✅ Form validation and persistence
+- ✅ Navigation between routes
+- ✅ Theme switching (light/dark)
+
+> 🧰 Cypress setup and CI integration (e.g. GitHub Actions) will be added in future versions.
+
+---
+
+## 📸 Screenshots
+
+| Home | Onboarding | Dashboard |
+|------|------------|-----------|
+| ![Home](./screenshots/home.png) | ![Onboarding](./screenshots/onboarding.png) | ![Dashboard](./screenshots/dashboard.png) |
+
+---
+
+## 🧩 Notes
+
+- 🛠 Built as a **demo and starter project** for client onboarding
+- 🧼 Uses clean, accessible markup and clear visual hierarchy
+- 🚫 No database or backend integration — entirely local (can be extended easily)
+
+---
+
+## 📬 Contact
+
+If you're looking for a frontend engineer to craft **clean, usable, thoughtful** onboarding flows:
+
+- 📧 quim@quimromero.com  
+- 🌐 [https://quimromero.com](https://quimromero.com)
+
+---
+
+> _ClientFlow helps makers move faster — by asking the right questions at the right time._
