@@ -8,22 +8,32 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) navigate("/login");
-  }, [user]);
+    if (!user) navigate("/login", { replace: true });
+  }, [user, navigate]);
 
   if (!user) return null;
 
+  const firstPart = user.split("@")[0];
+
   return (
-    <main className="min-h-screen container py-20">
-      <h1 className="text-3xl font-display font-bold mb-2">
-        Welcome back, {user?.split("@")[0]} 👋
+    <main
+      className="min-h-screen container py-20"
+      aria-labelledby="dashboard-title"
+    >
+      <h1 id="dashboard-title" className="text-3xl font-display font-bold mb-2">
+        Welcome back, {firstPart} 👋
       </h1>
       <p className="text-muted mb-8">
         Here's the current status of your project.
       </p>
 
-      <section className="bg-light dark:bg-dark p-6 rounded-xl shadow-sm border border-muted/10 mb-12">
-        <h2 className="text-xl font-semibold mb-4">Project Status</h2>
+      <section
+        className="bg-light dark:bg-dark p-6 rounded-xl shadow-sm border border-muted/10 mb-12"
+        aria-labelledby="project-status-title"
+      >
+        <h2 id="project-status-title" className="text-xl font-semibold mb-4">
+          Project Status
+        </h2>
         <ul className="space-y-4 text-sm">
           <li className="flex items-center justify-between">
             <span className="text-muted">📝 Onboarding Complete</span>
@@ -44,8 +54,13 @@ export default function Dashboard() {
         </ul>
       </section>
 
-      <section className="bg-light dark:bg-dark p-6 rounded-xl shadow-sm border border-muted/10">
-        <h2 className="text-xl font-semibold mb-4">Your Submission</h2>
+      <section
+        className="bg-light dark:bg-dark p-6 rounded-xl shadow-sm border border-muted/10"
+        aria-labelledby="submission-title"
+      >
+        <h2 id="submission-title" className="text-xl font-semibold mb-4">
+          Your Submission
+        </h2>
         <div className="space-y-2 text-sm">
           <p>
             <span className="font-medium text-muted">Name:</span> {data.name}
