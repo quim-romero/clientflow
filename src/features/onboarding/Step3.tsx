@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, type ChangeEvent } from "react";
 import { motion } from "framer-motion";
 import { useOnboardingStore } from "../../store/onboardingStore";
 
@@ -9,7 +9,7 @@ export default function Step3() {
   const nextStep = useOnboardingStore((s) => s.nextStep);
   const prevStep = useOnboardingStore((s) => s.prevStep);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
@@ -33,35 +33,47 @@ export default function Step3() {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4 }}
       className="container py-12 max-w-xl"
+      aria-labelledby="assets-title"
     >
-      <h2 className="text-2xl font-display font-bold mb-6">
+      <h2 id="assets-title" className="text-2xl font-display font-bold mb-6">
         Upload any helpful assets
       </h2>
-      <p className="text-muted mb-6">
+      <p id="assets-help" className="text-muted mb-6">
         Brand files, previous work, references — anything you think helps us
         understand your project better.
       </p>
 
-      <div
+      <label htmlFor="assets" className="sr-only">
+        Select files to upload
+      </label>
+      <input
+        id="assets"
+        type="file"
+        ref={fileInputRef}
+        multiple
+        onChange={handleFileChange}
+        aria-describedby="assets-help"
+        className="sr-only"
+      />
+
+      <button
+        type="button"
         onClick={openFileDialog}
-        className="cursor-pointer border-2 border-dashed border-muted/50 dark:border-white/20 rounded-xl p-6 text-center hover:bg-muted/10 dark:hover:bg-white/5 transition"
+        className="w-full cursor-pointer border-2 border-dashed border-muted/50 dark:border-white/20 rounded-xl p-6 text-center hover:bg-muted/10 dark:hover:bg-white/5 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand"
+        aria-describedby="assets-help"
       >
         <p className="text-sm">Click to select files</p>
         <p className="text-xs text-muted mt-1">
           Accepted formats: PDF, JPG, PNG, TXT, etc.
         </p>
-      </div>
-
-      <input
-        type="file"
-        ref={fileInputRef}
-        multiple
-        onChange={handleFileChange}
-        className="hidden"
-      />
+      </button>
 
       {data.assets && data.assets.length > 0 && (
-        <ul className="mt-6 space-y-2 text-sm">
+        <ul
+          className="mt-6 space-y-2 text-sm"
+          aria-live="polite"
+          aria-relevant="additions removals"
+        >
           {data.assets.map((file, i) => (
             <li
               key={i}

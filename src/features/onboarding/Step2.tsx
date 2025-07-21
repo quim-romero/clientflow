@@ -47,10 +47,15 @@ export default function Step2() {
       <h2 className="text-2xl font-display font-bold mb-6">Your Preferences</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium">
+          <label htmlFor="communication" className="block text-sm font-medium">
             Preferred communication style
           </label>
           <select
+            id="communication"
+            aria-invalid={errors.communication ? true : undefined}
+            aria-describedby={
+              errors.communication ? "communication-error" : undefined
+            }
             {...register("communication")}
             className="w-full mt-1 rounded border-muted bg-white dark:bg-dark p-2"
           >
@@ -61,41 +66,51 @@ export default function Step2() {
             <option value="async">Async (Notion, Docs, etc.)</option>
           </select>
           {errors.communication && (
-            <p className="text-red-500 text-sm mt-1">
+            <p id="communication-error" className="text-red-500 text-sm mt-1">
               {errors.communication.message}
             </p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium">
+          <label htmlFor="availability" className="block text-sm font-medium">
             Your availability (hours/time zone)
           </label>
           <input
+            id="availability"
+            aria-invalid={errors.availability ? true : undefined}
+            aria-describedby={
+              errors.availability ? "availability-error" : undefined
+            }
             type="text"
             {...register("availability")}
             placeholder="e.g., Mon–Fri 10am–6pm CET"
             className="w-full mt-1 rounded border-muted bg-white dark:bg-dark p-2"
           />
           {errors.availability && (
-            <p className="text-red-500 text-sm mt-1">
+            <p id="availability-error" className="text-red-500 text-sm mt-1">
               {errors.availability.message}
             </p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium">
+          <label htmlFor="tools" className="block text-sm font-medium">
             What tools do you use or prefer?
           </label>
           <input
+            id="tools"
+            aria-invalid={errors.tools ? true : undefined}
+            aria-describedby={errors.tools ? "tools-error" : undefined}
             type="text"
             {...register("tools")}
             placeholder="Figma, Notion, Loom, Trello, etc."
             className="w-full mt-1 rounded border-muted bg-white dark:bg-dark p-2"
           />
           {errors.tools && (
-            <p className="text-red-500 text-sm mt-1">{errors.tools.message}</p>
+            <p id="tools-error" className="text-red-500 text-sm mt-1">
+              {errors.tools.message}
+            </p>
           )}
         </div>
 

@@ -48,42 +48,62 @@ export default function Step1() {
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium">Your Name</label>
+          <label htmlFor="name" className="block text-sm font-medium">
+            Your Name
+          </label>
           <input
+            id="name"
+            aria-invalid={errors.name ? true : undefined}
+            aria-describedby={errors.name ? "name-error" : undefined}
             type="text"
             {...register("name")}
             className="w-full mt-1 rounded border-muted bg-white dark:bg-dark p-2"
           />
           {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+            <p id="name-error" className="text-red-500 text-sm mt-1">
+              {errors.name.message}
+            </p>
           )}
         </div>
+
         <div>
-          <label className="block text-sm font-medium">Company</label>
+          <label htmlFor="company" className="block text-sm font-medium">
+            Company
+          </label>
           <input
+            id="company"
+            aria-invalid={errors.company ? true : undefined}
+            aria-describedby={errors.company ? "company-error" : undefined}
             type="text"
             {...register("company")}
             className="w-full mt-1 rounded border-muted bg-white dark:bg-dark p-2"
           />
           {errors.company && (
-            <p className="text-red-500 text-sm mt-1">
+            <p id="company-error" className="text-red-500 text-sm mt-1">
               {errors.company.message}
             </p>
           )}
         </div>
+
         <div>
-          <label className="block text-sm font-medium">
+          <label htmlFor="goals" className="block text-sm font-medium">
             What are your main goals?
           </label>
           <textarea
-            {...register("goals")}
+            id="goals"
+            aria-invalid={errors.goals ? true : undefined}
+            aria-describedby={errors.goals ? "goals-error" : undefined}
             rows={4}
+            {...register("goals")}
             className="w-full mt-1 rounded border-muted bg-white dark:bg-dark p-2"
           />
           {errors.goals && (
-            <p className="text-red-500 text-sm mt-1">{errors.goals.message}</p>
+            <p id="goals-error" className="text-red-500 text-sm mt-1">
+              {errors.goals.message}
+            </p>
           )}
         </div>
+
         <div className="pt-4">
           <button
             type="submit"
