@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 
 export default function Login() {
   const setUser = useOnboardingStore((s) => s.setUser);
+  const setStep = useOnboardingStore((s) => s.setStep);
   const reset = useOnboardingStore((s) => s.reset);
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm<{ email: string }>();
@@ -38,6 +39,21 @@ export default function Login() {
             Start Onboarding
           </button>
         </form>
+        +{" "}
+        <div className="mt-6 flex gap-3">
+          <button
+            type="button"
+            onClick={() => {
+              reset();
+              setUser("guest@clientflow.io");
+              setStep(1);
+              navigate("/onboarding");
+            }}
+            className="px-4 py-2 rounded-full border border-muted text-muted hover:bg-muted/10 transition"
+          >
+            Enter as Guest
+          </button>
+        </div>
       </div>
     </main>
   );

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOnboardingStore } from "../../store/onboardingStore";
 import { motion } from "framer-motion";
+import { demoSeed } from "../../seed/demo";
 
 const schema = z.object({
   name: z.string().min(2, "Name is too short"),
@@ -21,6 +22,7 @@ export default function Step1() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -35,6 +37,18 @@ export default function Step1() {
     nextStep();
   };
 
+  const handlePrefill = () => {
+    updateData(demoSeed);
+    reset(
+      {
+        name: (demoSeed as Partial<FormData>).name ?? "",
+        company: (demoSeed as Partial<FormData>).company ?? "",
+        goals: (demoSeed as Partial<FormData>).goals ?? "",
+      },
+      { keepErrors: false, keepDirty: false, keepTouched: false }
+    );
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -46,6 +60,17 @@ export default function Step1() {
       <h2 className="text-2xl font-display font-bold mb-6">
         Let’s get started
       </h2>
+
+      <div className="mb-4">
+        <button
+          type="button"
+          onClick={handlePrefill}
+          className="text-sm px-3 py-1 rounded-full border border-muted text-muted hover:bg-muted/10"
+        >
+          Prefill demo
+        </button>
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium">
