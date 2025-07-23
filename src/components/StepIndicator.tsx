@@ -1,48 +1,31 @@
 import { useOnboardingStore } from "../store/onboardingStore";
-import clsx from "clsx";
 
-const steps = ["User Info", "Preferences", "Assets", "Review", "Done"];
+const TOTAL_STEPS = 5;
 
 export default function StepIndicator() {
-  const step = useOnboardingStore((s) => s.onboardingStep);
+  const rawStep = useOnboardingStore((s) => s.onboardingStep);
 
-  return +(
-    <div
-      className="w-full flex justify-center mb-8"
-      role="navigation"
-      aria-label="Onboarding progress"
-    >
-      <div className="flex gap-2 sm:gap-4">
-        {steps.map((label, index) => {
-          const stepNum = index + 1;
-          const isActive = step === stepNum;
-          const isCompleted = step > stepNum;
+  const step = Number.isFinite(rawStep) && rawStep! >= 1 ? rawStep! : 1;
 
-          return (
-            <div
-              key={label}
-              className="flex items-center gap-2"
-              role="listitem"
-              aria-label={label}
-            >
-              <div
-                className={clsx("w-4 h-4 rounded-full border-2", {
-                  "bg-brand border-brand": isActive,
-                  "bg-muted border-muted": !isActive && !isCompleted,
-                  "bg-brand border-brand/80": isCompleted,
-                })}
-                aria-current={isActive ? "step" : undefined}
-              />
-              <span className="text-sm text-muted hidden sm:block">
-                {label}
-              </span>
-              {stepNum !== steps.length && (
-                <span className="w-8 h-px bg-muted/50 hidden sm:block" />
-              )}
-            </div>
-          );
-        })}
+  const progress =
+    TOTAL_STEPS > 0
+      ? Math.min(100, Math.max(0, (step / TOTAL_STEPS) * 100))
+      : 0;
+
+  const progressPct = Number.isFinite(progress) ? Math.round(progress) : 0;
+
+  return (
+    <div className="container max-w-xl mb-6" aria-label="Progress">
+      <div className="h-2 w-full bg-muted/30 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-brand transition-all"
+          style={{ width: `${progressPct}%` }}
+          aria-hidden="true"
+        />
       </div>
+      <p className="sr-only" aria-live="polite">
+        Step {step} of {TOTAL_STEPS}
+      </p>
     </div>
   );
 }

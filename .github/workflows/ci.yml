@@ -17,4 +17,4 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - name: E2E (Cypress headless)
-        run: npm run e2e
+        run: npm run e2e:ci

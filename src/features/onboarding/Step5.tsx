@@ -38,7 +38,8 @@ export default function Step5() {
       <div>
         <Link
           to="/dashboard"
-          className="inline-flex items-center justify-center rounded-full px-6 py-2 text-sm font-semibold bg-brand text-white hover:bg-brand/90 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand"
+          className="inline-block px-6 py-2 rounded-full bg-brand text-white hover:bg-brand-dark transition"
+          aria-label="Go to Dashboard"
         >
           Go to dashboard
         </Link>

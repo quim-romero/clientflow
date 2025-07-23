@@ -8,8 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:e2e": "start-server-and-test dev http://localhost:5173 'cypress run'",
-    "e2e:open": "start-server-and-test dev http://localhost:5173 'cypress open'"
+    "test:e2e": "start-server-and-test dev http://localhost:5173 \"cypress run\"",
+    "e2e:open": "start-server-and-test dev http://localhost:5173 \"cypress open\"",
+    "e2e:ci": "start-server-and-test preview http://localhost:4173 \"cypress run --config baseUrl=http://localhost:4173\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",

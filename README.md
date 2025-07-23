@@ -1,5 +1,7 @@
 # ClientFlow — Minimal Onboarding Flow for Agencies
 
+![E2E Tests](https://github.com/quim-romero/clientflow/actions/workflows/ci.yml/badge.svg)
+
 > _Smooth client onboarding, no friction. Just clarity, flow — and faster projects._
 
 ---

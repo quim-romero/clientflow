@@ -38,8 +38,7 @@ export default function Login() {
           >
             Start Onboarding
           </button>
-        </form>
-        +{" "}
+        </form>{" "}
         <div className="mt-6 flex gap-3">
           <button
             type="button"
