@@ -10,7 +10,10 @@
     "preview": "vite preview",
     "test:e2e": "start-server-and-test dev http://localhost:5173 \"cypress run\"",
     "e2e:open": "start-server-and-test dev http://localhost:5173 \"cypress open\"",
-    "e2e:ci": "start-server-and-test preview http://localhost:4173 \"cypress run --config baseUrl=http://localhost:4173\""
+    "lhci": "npm run build && lhci autorun --collect.startServerCommand=\"npm run preview\" --collect.url=http://localhost:4173 --collect.settings.output=json,html --upload.target=filesystem --upload.outputDir=./lhci",
+    "e2e:ci": "start-server-and-test preview http://localhost:4173 \"cypress run --config baseUrl=http://localhost:4173\"",
+    "lhci:collect": "npm run build && lhci collect --url=http://localhost:4173 --startServerCommand='vite preview' --numberOfRuns=3",
+    "lhci:report": "lhci upload --target=filesystem --outputDir=./lhci"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -26,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@lhci/cli": "^0.15.1",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/cypress": "^10.0.3",
