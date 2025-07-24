@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true" role="img">
+  <defs>
+    <style>
+      .bg { fill: #7C3AED; }
+      .txt { fill: #fff; font: 700 56px system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="100" height="100" rx="20" ry="20"/>
+  <text class="txt" x="50" y="62" text-anchor="middle">CF</text>
+</svg>
