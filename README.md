@@ -11,6 +11,7 @@
 **ClientFlow** is a sleek, no-nonsense onboarding app designed to simplify how digital agencies and freelancers gather initial information from clients.
 
 With a smooth, multi-step form flow and persistent state, it helps teams:
+
 - 📥 Collect user and company details
 - 🧭 Understand project goals, tools, and availability
 - 📁 Upload relevant assets for faster kickoff
@@ -32,7 +33,7 @@ Built with **React**, **Zustand**, **Zod**, and **Tailwind CSS**, it’s fast, m
 - ✅ Multi-step onboarding flow with persistent progress
 - ✍️ Collects user name, company, goals, preferences, and files
 - 🧠 Zod-powered form validation (via `react-hook-form`)
-- 📁 Asset upload with inline preview and file metadata
+- 📁 Asset upload with file metadata (name, size, type)
 - 🌓 Light/Dark mode toggle with localStorage memory
 - 🧱 Responsive design with smooth transitions (Framer Motion)
 - 🧪 ESLint and TypeScript strict mode enforcement
@@ -41,16 +42,16 @@ Built with **React**, **Zustand**, **Zod**, and **Tailwind CSS**, it’s fast, m
 
 ## 🧠 Tech Stack
 
-| Tech                       | Role                                |
-|----------------------------|-------------------------------------|
-| **React + TypeScript**     | Core frontend framework             |
-| **Zustand**                | Global state and onboarding steps   |
-| **Zod + React Hook Form**  | Schema validation + form handling   |
-| **Tailwind CSS**           | Design system and theming           |
-| **Framer Motion**          | Animations and page transitions     |
-| **Vite**                   | Build tool and local dev server     |
-| **React Router**           | Routing between views               |
-| **ESLint + typescript-eslint** | Linting and code quality       |
+| Tech                           | Role                              |
+| ------------------------------ | --------------------------------- |
+| **React + TypeScript**         | Core frontend framework           |
+| **Zustand**                    | Global state and onboarding steps |
+| **Zod + React Hook Form**      | Schema validation + form handling |
+| **Tailwind CSS**               | Design system and theming         |
+| **Framer Motion**              | Animations and page transitions   |
+| **Vite**                       | Build tool and local dev server   |
+| **React Router**               | Routing between views             |
+| **ESLint + typescript-eslint** | Linting and code quality          |
 
 ---
 
@@ -70,24 +71,49 @@ Built with **React**, **Zustand**, **Zod**, and **Tailwind CSS**, it’s fast, m
 
 ---
 
-## 🧪 End-to-End Testing (Planned)
+## 🧪 End-to-End Testing
 
-ClientFlow will soon support **end-to-end testing** using [Cypress](https://www.cypress.io/).
+ClientFlow will use **Cypress** for reliable E2E testing. The suite is being set up so that each PR and every push to `main` runs checks via **GitHub Actions**.
 
-Tests will cover:
-- ✅ Onboarding flow step-by-step
-- ✅ Form validation and persistence
-- ✅ Navigation between routes
-- ✅ Theme switching (light/dark)
+**Currently tested:**
 
-> 🧰 Cypress setup and CI integration (e.g. GitHub Actions) will be added in future versions.
+- ✅ **Home** (`/`) → basic render & CTA navigation to **Login** (`/login`)
+- ✅ **Login** → mock email sign-in sets a `user` in state and redirects to **Onboarding**
+- ✅ **Onboarding flow** → Steps 1–5 validate with **Zod** + `react-hook-form`
+- ✅ **Route guards** → visiting `/onboarding` or `/dashboard` without a `user` redirects to `/login`
+- ✅ **Theme persistence** → toggle saves to `localStorage` and applies `documentElement.classList('dark')`
+- ✅ **Asset upload** → file list renders with name and size; metadata stored in state
+- ✅ **State persistence** → onboarding progress saved via Zustand `persist` (key: `clientflow-onboarding`)
+
+**Coming soon:**
+
+- 🧭 URL-friendly step routing (deep-linking / refresh-safe)
+- 📤 Export responses (JSON) + PDF/screenshot smoke checks
+- ⚙️ Production build smoke tests with `vite preview`
+- 🔒 Upload hardening (basic file-type restrictions)
+- 📷 Inline file previews
+
+🧪 **CI status:** [View on GitHub Actions →](https://github.com/quim-romero/clientflow/actions)
+
+---
+
+## ♿ Accessibility & ⚡ Performance
+
+- **Accessibility:** planned for future versions.
+- **Performance:** Lighthouse (LHCI) runs against the production build.  
+  _Goal: keep FCP/LCP in the green on the homepage._
+
+![Lighthouse](./public/lighthouse.png)
+
+> Generate locally with: npm run build && npm run lh:report  
+> Reports are saved to ./lhci/.
 
 ---
 
 ## 📸 Screenshots
 
-| Home | Onboarding | Dashboard |
-|------|------------|-----------|
+| Home                            | Onboarding                                  | Dashboard                                 |
+| ------------------------------- | ------------------------------------------- | ----------------------------------------- |
 | ![Home](./screenshots/home.png) | ![Onboarding](./screenshots/onboarding.png) | ![Dashboard](./screenshots/dashboard.png) |
 
 ---
@@ -104,7 +130,7 @@ Tests will cover:
 
 If you're looking for a frontend engineer to craft **clean, usable, thoughtful** onboarding flows:
 
-- 📧 quim@quimromero.com  
+- 📧 quim@quimromero.com
 - 🌐 [https://quimromero.com](https://quimromero.com)
 
 ---
