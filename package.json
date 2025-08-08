@@ -1,7 +1,7 @@
 {
   "name": "clientflow",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,7 +13,8 @@
     "lhci": "npm run build && lhci autorun --collect.startServerCommand=\"npm run preview\" --collect.url=http://localhost:4173 --collect.settings.output=json,html --upload.target=filesystem --upload.outputDir=./lhci",
     "e2e:ci": "start-server-and-test preview http://localhost:4173 \"cypress run --config baseUrl=http://localhost:4173\"",
     "lhci:collect": "npm run build && lhci collect --url=http://localhost:4173 --startServerCommand='vite preview' --numberOfRuns=3",
-    "lhci:report": "lhci upload --target=filesystem --outputDir=./lhci"
+    "lhci:report": "lhci upload --target=filesystem --outputDir=./lhci",
+    "test:a11y": "cypress run --spec 'cypress/e2e/a11y.cy.*'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -41,7 +42,9 @@
     "@typescript-eslint/parser": "^8.39.0",
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.21",
+    "axe-core": "^4.10.3",
     "cypress": "^14.5.4",
+    "cypress-axe": "^1.6.0",
     "eslint": "^9.33.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
