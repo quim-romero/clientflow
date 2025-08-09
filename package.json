@@ -14,7 +14,8 @@
     "e2e:ci": "start-server-and-test preview http://localhost:4173 \"cypress run --config baseUrl=http://localhost:4173\"",
     "lhci:collect": "npm run build && lhci collect --url=http://localhost:4173 --startServerCommand='vite preview' --numberOfRuns=3",
     "lhci:report": "lhci upload --target=filesystem --outputDir=./lhci",
-    "test:a11y": "cypress run --spec 'cypress/e2e/a11y.cy.*'"
+    "test:a11y": "cypress run --spec 'cypress/e2e/a11y.cy.*'",
+    "open:a11y": "cypress open --e2e --config specPattern='cypress/e2e/a11y.cy.*'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
