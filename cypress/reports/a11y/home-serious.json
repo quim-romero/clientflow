@@ -1,0 +1,157 @@
+[
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=axeAPI",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#201d4d",
+              "bgColor": "#1e1b4b",
+              "contrastRatio": 1.02,
+              "fontSize": "36.0pt (48px)",
+              "fontWeight": "bold",
+              "messageKey": null,
+              "expectedContrastRatio": "3:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<body class=\"bg-light text-dark dark:bg-dark dark:text-white font-sans\">",
+                "target": [
+                  "body"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 1.02 (foreground color: #201d4d, background color: #1e1b4b, font size: 36.0pt (48px), font weight: bold). Expected contrast ratio of 3:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<h1 class=\"text-4xl sm:text-5xl font-display font-bold mb-3\">Welcome to <span class=\"text-brand\">ClientFlow</span></h1>",
+        "target": [
+          "h1"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.02 (foreground color: #201d4d, background color: #1e1b4b, font size: 36.0pt (48px), font weight: bold). Expected contrast ratio of 3:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#201d4d",
+              "bgColor": "#1e1b4b",
+              "contrastRatio": 1.02,
+              "fontSize": "12.0pt (16px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<body class=\"bg-light text-dark dark:bg-dark dark:text-white font-sans\">",
+                "target": [
+                  "body"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 1.02 (foreground color: #201d4d, background color: #1e1b4b, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p class=\"max-w-md mb-10 text-slate-600 dark:text-indigo-200\">An elegant, frictionless onboarding flow — crafted with clarity and care.</p>",
+        "target": [
+          ".max-w-md"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.02 (foreground color: #201d4d, background color: #1e1b4b, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#201d4d",
+              "bgColor": "#1f1b4d",
+              "contrastRatio": 1.01,
+              "fontSize": "12.0pt (16px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<a class=\"px-6 py-2 rounded-full bg-brand text-white hover:bg-brand-dark transition\" href=\"/login\" data-discover=\"true\">Start Onboarding</a>",
+                "target": [
+                  ".py-2"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 1.01 (foreground color: #201d4d, background color: #1f1b4d, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<a class=\"px-6 py-2 rounded-full bg-brand text-white hover:bg-brand-dark transition\" href=\"/login\" data-discover=\"true\">Start Onboarding</a>",
+        "target": [
+          ".py-2"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.01 (foreground color: #201d4d, background color: #1f1b4d, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#201d4d",
+              "bgColor": "#1e1b4b",
+              "contrastRatio": 1.02,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<body class=\"bg-light text-dark dark:bg-dark dark:text-white font-sans\">",
+                "target": [
+                  "body"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 1.02 (foreground color: #201d4d, background color: #1e1b4b, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p class=\"text-xs mt-2 text-slate-600 dark:text-indigo-200\">No signup needed</p>",
+        "target": [
+          ".text-xs"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.02 (foreground color: #201d4d, background color: #1e1b4b, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  }
+]
