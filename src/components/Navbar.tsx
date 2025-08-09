@@ -25,16 +25,22 @@ export default function Navbar() {
           <>
             <Link
               to="/dashboard"
+              aria-current={isActive("/dashboard") ? "page" : undefined}
               className={`text-sm ${
-                isActive("/dashboard") ? "font-semibold" : "text-muted"
+                isActive("/dashboard")
+                  ? "font-semibold"
+                  : "text-slate-600 dark:text-indigo-200"
               }`}
             >
               Dashboard
             </Link>
             <Link
               to="/onboarding"
+              aria-current={isActive("/onboarding") ? "page" : undefined}
               className={`text-sm ${
-                isActive("/onboarding") ? "font-semibold" : "text-muted"
+                isActive("/onboarding")
+                  ? "font-semibold"
+                  : "text-slate-600 dark:text-indigo-200"
               }`}
             >
               Onboarding
@@ -47,10 +53,12 @@ export default function Navbar() {
         <ThemeToggle />
         {user ? (
           <>
-            <span className="text-sm text-muted hidden sm:block">{user}</span>
+            <span className="text-sm hidden sm:block text-slate-600 dark:text-indigo-200">
+              {user}
+            </span>
             <button
               onClick={handleLogout}
-              className="text-sm px-3 py-1 rounded-full border border-muted text-muted hover:bg-muted/10 transition"
+              className="text-sm px-3 py-1 rounded-full border border-muted text-slate-600 dark:text-indigo-200 hover:bg-muted/10 transition"
             >
               Logout
             </button>
