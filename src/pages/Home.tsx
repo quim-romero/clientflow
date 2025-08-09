@@ -26,7 +26,10 @@ export default function Home() {
       transition={{ duration: 0.5 }}
       className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden"
     >
-      <div className="absolute text-[12rem] sm:text-[16rem] opacity-5 font-display text-brand -z-10 select-none pointer-events-none">
+      <div
+        aria-hidden="true"
+        className="absolute text-[12rem] sm:text-[16rem] opacity-5 font-display text-brand -z-10 select-none pointer-events-none"
+      >
         ClientFlow
       </div>
 
@@ -44,7 +47,7 @@ export default function Home() {
         Welcome to <span className="text-brand">ClientFlow</span>
       </h1>
 
-      <div className="mb-6 text-sm text-muted italic h-5">
+      <div className="mb-6 text-sm italic h-5">
         <AnimatePresence mode="wait">
           <motion.p
             key={index}
@@ -52,14 +55,14 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.5 }}
-            className="text-center whitespace-nowrap"
+            className="text-center whitespace-nowrap text-slate-600 dark:text-indigo-200"
           >
             {phrases[index]}
           </motion.p>
         </AnimatePresence>
       </div>
 
-      <p className="text-muted max-w-md mb-10">
+      <p className="max-w-md mb-10 text-slate-600 dark:text-indigo-200">
         An elegant, frictionless onboarding flow — crafted with clarity and
         care.
       </p>
@@ -72,7 +75,9 @@ export default function Home() {
           >
             Start Onboarding
           </Link>
-          <p className="text-xs text-muted mt-2">No signup needed</p>
+          <p className="text-xs mt-2 text-slate-600 dark:text-indigo-200">
+            No signup needed
+          </p>
         </motion.div>
       </div>
     </motion.main>
