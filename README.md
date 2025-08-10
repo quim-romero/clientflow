@@ -24,7 +24,7 @@ Built with **React**, **Zustand**, **Zod**, and **Tailwind CSS**, it’s fast, m
 
 ## 🚀 Live Preview
 
-👉 [https://clientflow.quimromero.com](https://clientflow.quimromero.com)
+👉 https://clientflow.quimromero.com
 
 ---
 
@@ -36,7 +36,9 @@ Built with **React**, **Zustand**, **Zod**, and **Tailwind CSS**, it’s fast, m
 - 📁 Asset upload with file metadata (name, size, type)
 - 🌓 Light/Dark mode toggle with localStorage memory
 - 🧱 Responsive design with smooth transitions (Framer Motion)
-- 🧪 ESLint and TypeScript strict mode enforcement
+- 🧪 Cypress E2E + **axe-core accessibility audits** (serious/critical)
+- 🔒 Route guards for authenticated sections (Login → Onboarding → Dashboard)
+- 💾 State persistence via Zustand `persist` (`clientflow-onboarding` key)
 
 ---
 
@@ -45,47 +47,54 @@ Built with **React**, **Zustand**, **Zod**, and **Tailwind CSS**, it’s fast, m
 | Tech                           | Role                              |
 | ------------------------------ | --------------------------------- |
 | **React + TypeScript**         | Core frontend framework           |
-| **Zustand**                    | Global state and onboarding steps |
-| **Zod + React Hook Form**      | Schema validation + form handling |
-| **Tailwind CSS**               | Design system and theming         |
-| **Framer Motion**              | Animations and page transitions   |
 | **Vite**                       | Build tool and local dev server   |
+| **Tailwind CSS**               | Design system and theming         |
+| **Framer Motion**              | Animations and transitions        |
+| **Zustand**                    | Global state and onboarding steps |
+| **React Hook Form + Zod**      | Form logic + schema validation    |
 | **React Router**               | Routing between views             |
 | **ESLint + typescript-eslint** | Linting and code quality          |
+| **Cypress**                    | End-to-end testing                |
+| **axe-core + cypress-axe**     | Accessibility audits inside E2E   |
 
 ---
 
 ## 🗂 Project Structure
 
 - `src/`
-  - `pages/` – Main routes: Home, Login, Onboarding, Dashboard
+  - `pages/` – Home, Login, Onboarding, Dashboard
   - `components/` – Navbar, Footer, StepIndicator, etc.
-  - `features/onboarding/` – All onboarding steps (1 to 5)
-  - `store/` – Zustand store with persistent onboarding data
-  - `hooks/` – Custom hooks (e.g. theme)
-  - `styles/` – Tailwind CSS base and global styles
-- `public/` – Favicon, fonts, and metadata
-- `index.html` – Root HTML with fonts and meta
-- `vite.config.ts` – Vite config with plugin-react
-- `tsconfig.*.json` – TypeScript project configurations
+  - `features/onboarding/` – Steps 1–5
+  - `store/` – Zustand store with persisted onboarding data
+  - `hooks/` – Theme and app utilities
+  - `styles/` – Tailwind base and globals
+- `public/` – Favicon, fonts, metadata
+- `index.html` – Root HTML
+- `vite.config.ts` – Vite config
+- `tsconfig.*.json` – TypeScript config
+- `cypress/`
+  - `e2e/a11y.cy.ts` – Axe accessibility spec (home route)
+  - `support/e2e.ts` – Testing Library + `cypress-axe` setup
+  - `screenshots/` – Run screenshots (e.g. `a11y-home.png`)
+  - `reports/a11y/` – JSON reports (e.g. `home-serious.json`)
 
 ---
 
 ## 🧪 End-to-End Testing
 
-ClientFlow will use **Cypress** for reliable E2E testing. The suite is being set up so that each PR and every push to `main` runs checks via **GitHub Actions**.
+ClientFlow uses **Cypress** for reliable E2E testing, with each PR and push to `main` running checks via **GitHub Actions**.
 
-**Currently tested:**
+**Currently tested**
 
 - ✅ **Home** (`/`) → basic render & CTA navigation to **Login** (`/login`)
-- ✅ **Login** → mock email sign-in sets a `user` in state and redirects to **Onboarding**
-- ✅ **Onboarding flow** → Steps 1–5 validate with **Zod** + `react-hook-form`
+- ✅ **Login** → mock email sign-in sets a `user` and redirects to **Onboarding**
+- ✅ **Onboarding flow** → Steps 1–5 validate via **Zod** + `react-hook-form`
 - ✅ **Route guards** → visiting `/onboarding` or `/dashboard` without a `user` redirects to `/login`
 - ✅ **Theme persistence** → toggle saves to `localStorage` and applies `documentElement.classList('dark')`
 - ✅ **Asset upload** → file list renders with name and size; metadata stored in state
-- ✅ **State persistence** → onboarding progress saved via Zustand `persist` (key: `clientflow-onboarding`)
+- ✅ **Accessibility (Axe)** → audits **serious/critical** violations on `/` (screenshot + JSON report)
 
-**Coming soon:**
+**Coming soon**
 
 - 🧭 URL-friendly step routing (deep-linking / refresh-safe)
 - 📤 Export responses (JSON) + PDF/screenshot smoke checks
@@ -93,20 +102,63 @@ ClientFlow will use **Cypress** for reliable E2E testing. The suite is being set
 - 🔒 Upload hardening (basic file-type restrictions)
 - 📷 Inline file previews
 
-🧪 **CI status:** [View on GitHub Actions →](https://github.com/quim-romero/clientflow/actions)
+🧪 **CI status:** https://github.com/quim-romero/clientflow/actions
 
 ---
 
 ## ♿ Accessibility & ⚡ Performance
 
-- **Accessibility:** planned for future versions.
-- **Performance:** Lighthouse (LHCI) runs against the production build.  
-  _Goal: keep FCP/LCP in the green on the homepage._
+**Accessibility**
+
+Automated audits with **axe-core** via `cypress-axe` are wired into E2E:
+
+- By default, we check **serious/critical** impacts on `/`
+- Each run emits a **screenshot** and a **JSON report**
+- You control whether the test **fails** CI on violations
+
+**Run locally**
+
+```bash
+# Headless (ideal for CI)
+npm run test:a11y
+
+# Interactive runner
+npx cypress open
+```
+
+**Artifacts**
+
+- Screenshot → `./cypress/screenshots/a11y.cy.ts/a11y-home.png`
+- JSON report (serious/critical) → `./cypress/reports/a11y/home-serious.json`
+
+**Fail CI on violations**
+
+In `cypress/e2e/a11y.cy.ts`, the last parameter of `cy.checkA11y(...)` controls failure:
+
+```ts
+// During cleanup/docs (does NOT fail on violations):
+cy.checkA11y(undefined, undefined, callback, true);
+
+// Enforce in CI (fails on serious/critical):
+cy.checkA11y(undefined, undefined, callback, false);
+```
+
+> To extend coverage later, remove the severity filter in the callback to include **all** impacts.
+
+**Performance**
+
+Lighthouse (LHCI) runs against the production build.  
+_Goal: keep FCP/LCP in the green on the homepage._
 
 ![Lighthouse](./public/lighthouse.png)
 
-> Generate locally with: npm run build && npm run lh:report  
-> Reports are saved to ./lhci/.
+Generate locally:
+
+```bash
+npm run build && npm run lh:report
+```
+
+Reports are saved to `./lhci/`.
 
 ---
 
@@ -120,9 +172,9 @@ ClientFlow will use **Cypress** for reliable E2E testing. The suite is being set
 
 ## 🧩 Notes
 
-- 🛠 Built as a **demo and starter project** for client onboarding
-- 🧼 Uses clean, accessible markup and clear visual hierarchy
-- 🚫 No database or backend integration — entirely local (can be extended easily)
+- 🛠 Built as a **demo / starter** project for client onboarding
+- 🧼 Clean, accessible markup and clear visual hierarchy
+- 🚫 No backend — entirely local, easy to extend with an API
 
 ---
 
@@ -131,7 +183,7 @@ ClientFlow will use **Cypress** for reliable E2E testing. The suite is being set
 If you're looking for a frontend engineer to craft **clean, usable, thoughtful** onboarding flows:
 
 - 📧 quim@quimromero.com
-- 🌐 [https://quimromero.com](https://quimromero.com)
+- 🌐 https://quimromero.com
 
 ---
 
